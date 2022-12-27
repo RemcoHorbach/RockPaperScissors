@@ -2,12 +2,17 @@ let playerScore = 0
 let computerScore = 0
 const buttons = document.querySelectorAll('input')
 
-function computerPlay() {
+function computerPick() {
     let choices = ['rock', 'paper', 'scissors']
     return choices[Math.floor(Math.random() * choices.length)]
 }
-function playRound(playerSelection) {
-    let computerSelection = computerPlay()
+function disableButtons() {
+    buttons.forEach(elem => {
+        elem.disabled = true
+    })
+}
+function playOneRound(playerSelection) {
+    let computerSelection = computerPick()
     let result = ""
 
     if ((playerSelection == 'rock' && computerSelection == 'scissors') ||
@@ -41,3 +46,8 @@ function playRound(playerSelection) {
     document.getElementById('result').innerHTML = result
     return
 }
+buttons.forEach(button =>{
+    button.addEventListener('click', function(){
+        playOneRound(button.value)
+    })
+})
